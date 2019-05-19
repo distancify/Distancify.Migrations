@@ -14,5 +14,5 @@ else
 Write-Output "Setting build variables..."
 Write-Output "fileVersion=$fileVersion"
 Write-Output "packageVersion=$packageVersion"
-Write-Output "##vso[task.setvariable variable=fileVersion]$version"
+Write-Output "##vso[task.setvariable variable=fileVersion]$fileVersion"
 Write-Output "##vso[task.setvariable variable=packageVersion]$packageVersion"
