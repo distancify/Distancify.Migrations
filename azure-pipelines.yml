@@ -25,6 +25,7 @@ steps:
     restoreSolution: '$(solution)'
 
 - task: PowerShell@2
+  displayName: 'SetBuildVariables.ps1'
   inputs:
     targetType: 'filePath'
     filePath: 'SetBuildVariables.ps1'
@@ -45,6 +46,7 @@ steps:
   displayName: 'NuGet pack'
   inputs:
     command: pack
+    packagesToPack: '**/Distancify.Migrations.csproj'
 
 - task: NuGetCommand@2
   displayName: 'NuGet push'
