@@ -4,6 +4,7 @@ if ($Env:BUILD_SOURCEBRANCH -match "^refs\/tags\/v(\d[\.0-9]*)$")
 {
     $fileVersion = $matches[1]
     $packageVersion = $fileVersion
+    $pushToNugetOrg = 'true'
 }
 elseif ($Env:BUILD_BUILDNUMBER -match "^\d+.(\d+)$") 
 {
@@ -14,10 +15,13 @@ elseif ($Env:BUILD_BUILDNUMBER -match "^\d+.(\d+)$")
     $revision = $matches[1]
     $fileVersion = "$major.$minor.$build.$revision"
     $packageVersion = "$fileVersion-ci"
+    $pushToNugetOrg = 'false'
 }
 
 Write-Output "Setting build variables..."
 Write-Output "fileVersion=$fileVersion"
 Write-Output "packageVersion=$packageVersion"
+Write-Output "pushToNugetOrg=$pushToNugetOrg"
 Write-Output "##vso[task.setvariable variable=fileVersion]$fileVersion"
 Write-Output "##vso[task.setvariable variable=packageVersion]$packageVersion"
+Write-Output "##vso[task.setvariable variable=pushToNugetOrg]$pushToNugetOrg"
