@@ -29,7 +29,7 @@ steps:
 - task: VSBuild@1
   inputs:
     solution: '$(solution)'
-    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactStagingDirectory)" /p:Version="$(packageVersion)" /p:FileVersion="$(fileVersion)" /p:AssemblyVersion="$(fileVersion)"'
+    msbuildArgs: '/p:SkipInvalidConfigurations=true /p:GeneratePackageOnBuild="false" /p:Version="$(packageVersion)" /p:FileVersion="$(fileVersion)" /p:AssemblyVersion="$(fileVersion)"'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
@@ -37,6 +37,11 @@ steps:
   inputs:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
+
+- task: NuGetCommand@2
+  displayName: 'NuGet pack'
+  inputs:
+    command: pack
 
 - task: NuGetCommand@2
   displayName: 'NuGet push'
