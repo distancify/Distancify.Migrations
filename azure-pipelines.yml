@@ -21,6 +21,7 @@ steps:
     versionSpec: 4.9.1
 
 - task: NuGetCommand@2
+  displayName: 'Restore NuGet packages'
   inputs:
     restoreSolution: '$(solution)'
 
@@ -31,6 +32,7 @@ steps:
     filePath: 'SetBuildVariables.ps1'
 
 - task: VSBuild@1
+  displayName: 'Build solution'
   inputs:
     solution: '$(solution)'
     msbuildArgs: '/p:SkipInvalidConfigurations=true /p:GeneratePackageOnBuild="false" /p:Version="$(packageVersion)" /p:FileVersion="$(fileVersion)" /p:AssemblyVersion="$(fileVersion)"'
@@ -38,6 +40,7 @@ steps:
     configuration: '$(buildConfiguration)'
 
 - task: VSTest@2
+  displayName: 'Run Tests'
   inputs:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
@@ -49,7 +52,7 @@ steps:
     packagesToPack: '**/Distancify.Migrations.csproj'
 
 - task: NuGetCommand@2
-  displayName: 'NuGet push'
+  displayName: 'Push to internal NuGet feed'
   inputs:
     command: push
     packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
