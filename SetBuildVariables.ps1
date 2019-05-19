@@ -1,4 +1,4 @@
-# This file sets the build variable "version" to be used in Azure Pipelines
+# This file sets build variables to be used in Azure Pipelines
 
 if ($Env:BUILD_SOURCEBRANCH -match "^refs\/tags\/v(\d[\.0-9]*)") 
 {

@@ -24,12 +24,12 @@ steps:
 - task: PowerShell@2
   inputs:
     targetType: 'filePath'
-    filePath: 'SetVersion.ps1'
+    filePath: 'SetBuildVariables.ps1'
 
 - task: VSBuild@1
   inputs:
     solution: '$(solution)'
-    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactStagingDirectory)" /p:Version="1.0.0"'
+    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactStagingDirectory)" /p:Version="$(version)"'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
