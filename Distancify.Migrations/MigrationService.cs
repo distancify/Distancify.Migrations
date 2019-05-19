@@ -8,10 +8,10 @@ namespace Distancify.Migrations
 {
     public class MigrationService
     {
-        private readonly DefaultMigrationLocator locator;
+        private readonly IMigrationLocator locator;
         private readonly IMigrationLog log;
 
-        public MigrationService(DefaultMigrationLocator locator, IMigrationLog log)
+        public MigrationService(IMigrationLocator locator, IMigrationLog log)
         {
             this.locator = locator;
             this.log = log;

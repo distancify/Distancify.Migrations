@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Distancify.Migrations
 {
-    public class DefaultMigrationLocator
+    public class DefaultMigrationLocator : IMigrationLocator
     {
         private IList<string> _assemblyIgnoreList = new List<string>
         {
