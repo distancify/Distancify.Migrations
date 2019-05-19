@@ -3,10 +3,13 @@
 if ($Env:BUILD_SOURCEBRANCH -match "^refs\/tags\/v(\d[\.0-9]*)") 
 {
     $version = $matches[1]
+    $packageVersion = $version
 }
 else
 {
-    $version = "$Env:BUILD_BUILDNUMBER-ci"
+    $version = "$Env:BUILD_BUILDNUMBER"
+    $packageVersion = "$version-ci"
 }
 
 Write-Output "##vso[task.setvariable variable=version]$version"
+Write-Output "##vso[task.setvariable variable=packageVersion]$packageVersion"
