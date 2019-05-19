@@ -9,10 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Distancify.Migrations.Tests
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{57CB69A9-43EC-43A5-957C-1DF5AF3B40AA}"
 	ProjectSection(SolutionItems) = preProject
-		..\Distancify.LitiumAddOns.OData\CONTRIBUTING.md = ..\Distancify.LitiumAddOns.OData\CONTRIBUTING.md
-		..\..\..\Users\KristofferLindvall\Downloads\Distancify.Migrations.png = ..\..\..\Users\KristofferLindvall\Downloads\Distancify.Migrations.png
-		..\Distancify.LitiumAddOns.OData\LICENSE = ..\Distancify.LitiumAddOns.OData\LICENSE
-		..\Distancify.LitiumAddOns.OData\README.md = ..\Distancify.LitiumAddOns.OData\README.md
+		CONTRIBUTING.md = CONTRIBUTING.md
+		Distancify.Migrations.png = Distancify.Migrations.png
+		LICENSE = LICENSE
+		README.md = README.md
 	EndProjectSection
 EndProject
 Global
