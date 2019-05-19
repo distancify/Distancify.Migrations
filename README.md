@@ -90,6 +90,10 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduc
 
 We use [SemVer](http://semver.org/) for versioning.
 
+## Publishing
+
+Use CreateRelease.ps1 to create a new release. There's a CI build from every __master__ build on Distancify's internal NuGet feed.
+
 ## Authors
 
 See the list of [contributors](https://github.com/distancify/Distancify.Migrations/graphs/contributors) who participated in this project.
