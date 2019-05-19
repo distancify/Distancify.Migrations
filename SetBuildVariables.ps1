@@ -1,13 +1,18 @@
 # This file sets build variables to be used in Azure Pipelines
 
-if ($Env:BUILD_SOURCEBRANCH -match "^refs\/tags\/v(\d[\.0-9]*)") 
+if ($Env:BUILD_SOURCEBRANCH -match "^refs\/tags\/v(\d[\.0-9]*)$") 
 {
     $fileVersion = $matches[1]
     $packageVersion = $fileVersion
 }
-else
+elseif ($Env:BUILD_BUILDNUMBER -match "^\d+.(\d+)$") 
 {
-    $fileVersion = "$Env:BUILD_BUILDNUMBER"
+    $date = get-date
+    $major = $date.Year
+    $minor = $date.Month
+    $build = $date.Day
+    $revision = $matches[1]
+    $fileVersion = "$major.$minor.$build.$revision"
     $packageVersion = "$fileVersion-ci"
 }
 
