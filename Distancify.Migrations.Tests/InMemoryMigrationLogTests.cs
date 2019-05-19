@@ -47,7 +47,7 @@ namespace Distancify.Migrations.Tests
             sut.Commit(new BA1Migration());
             var result = sut.GetCommitted();
 
-            Assert.Equal(1, result.Count());
+            Assert.Single(result);
             Assert.Contains(typeof(BA1Migration), result);
         }
     }

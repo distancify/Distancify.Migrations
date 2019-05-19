@@ -67,16 +67,16 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Distancify.Migrations\Distancify.Migrations.csproj">
-      <Project>{12fc074d-8599-437f-a53c-98e1c1b28a5e}</Project>
-      <Name>Distancify.Migrations</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\xunit.analyzers.0.10.0\analyzers\dotnet\cs\xunit.analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Distancify.Migrations\Distancify.Migrations.csproj">
+      <Project>{668ca6a2-764e-4fd9-9d83-b119e44c95b4}</Project>
+      <Name>Distancify.Migrations</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
