@@ -10,6 +10,7 @@
     <PackageIconUrl>https://distancify.com/favicon.png</PackageIconUrl>
     <Version>0.0.1</Version>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <IconUrl>https://distancify.com/favicon.png</IconUrl>
   </PropertyGroup>
 
   <ItemGroup>
