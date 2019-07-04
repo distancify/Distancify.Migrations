@@ -15,7 +15,7 @@ namespace Distancify.Migrations.Tests
     {
         public override void Apply()
         {
-            
+
         }
     }
 
@@ -63,4 +63,37 @@ namespace Distancify.Migrations.Tests
             SystemState.SomeValue += 2;
         }
     }
+
+    public abstract class CMigration : Migration
+    {
+
+    }
+
+    [MigrationOrder("c")]
+    public class C1Migration : CMigration
+    {
+        public override void Apply()
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    [MigrationOrder("a")]
+    public class C2Migration : CMigration
+    {
+        public override void Apply()
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    [MigrationOrder("b")]
+    public class C3Migration : CMigration
+    {
+        public override void Apply()
+        {
+            throw new NotImplementedException();
+        }
+    }
+
 }

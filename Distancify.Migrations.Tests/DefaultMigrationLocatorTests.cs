@@ -57,5 +57,22 @@ namespace Distancify.Migrations.Tests
 
             Assert.Contains(typeof(B1Migration), result);
         }
+
+        [Fact]
+        public void Locate_ApplyDependentMigrationsFirst()
+        {
+            var sut = new DefaultMigrationLocator();
+            var result = sut.LocateAll<CMigration>().ToList();
+
+            var expected = new List<Type>
+            {
+                typeof(TestMigration),
+                typeof(C2Migration),
+                typeof(C3Migration),
+                typeof(C1Migration)
+            };
+
+            Assert.Equal(expected, result);
+        }
     }
 }

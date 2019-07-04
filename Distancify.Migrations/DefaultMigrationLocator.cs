@@ -28,7 +28,10 @@ namespace Distancify.Migrations
             }
             while ((c = c.BaseType) != typeof(object));
 
-            return result;
+            return result.OrderBy(r => {
+                var orderAttribute = r.GetCustomAttributes(false).FirstOrDefault(a => a is MigrationOrder);
+                return orderAttribute != null ? ((MigrationOrder)orderAttribute).Order : string.Empty;
+            });
         }
 
         private IEnumerable<Type> GetChildren(Type type)
