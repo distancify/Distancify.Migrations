@@ -30,7 +30,7 @@ namespace Distancify.Migrations
 
             return result.OrderBy(r => {
                 var orderAttribute = r.GetCustomAttributes(false).FirstOrDefault(a => a is MigrationOrder);
-                return orderAttribute != null ? ((MigrationOrder)orderAttribute).Order : string.Empty;
+                return orderAttribute != null ? ((MigrationOrder)orderAttribute).Order : r.Name;
             });
         }
 
