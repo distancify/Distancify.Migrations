@@ -17,17 +17,16 @@ namespace Distancify.Migrations
 
         public void Apply<T>()
         {
-            var logg = new SqlMigrationLog("Server=localhost;Database=LitiumDB_KidsConcept.Web;Trusted_Connection=True;");
 
             var migrations = locator.LocateAll<T>()
-                .Where(r => !logg.IsCommited(r))
+                .Where(r => !log.IsCommited(r))
                 .Select(r => Activator.CreateInstance(r))
                 .OfType<Migration>();
 
             foreach (var m in migrations)
             {
                 m.Apply();
-                logg.Commit(m);
+                log.Commit(m);
             }
         }
     }
