@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Distancify.Migrations.SqlMigration;
+using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Distancify.Migrations
 {
@@ -19,14 +17,17 @@ namespace Distancify.Migrations
 
         public void Apply<T>()
         {
+            var logg = new SqlMigrationLog("Server=localhost;Database=LitiumDB_KidsConcept.Web;Trusted_Connection=True;");
+
             var migrations = locator.LocateAll<T>()
-                .Where(r => !log.IsApplied(r))
+                .Where(r => !logg.IsCommited(r))
                 .Select(r => Activator.CreateInstance(r))
                 .OfType<Migration>();
 
             foreach (var m in migrations)
             {
                 m.Apply();
+                logg.Commit(m);
             }
         }
     }

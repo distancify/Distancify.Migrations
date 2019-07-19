@@ -10,7 +10,7 @@ namespace Distancify.Migrations
     {
         IEnumerable<Type> GetCommitted();
 
-        bool IsApplied(Type migration);
+        bool IsCommited(Type migration);
 
         void Commit(Migration migration);
     }
