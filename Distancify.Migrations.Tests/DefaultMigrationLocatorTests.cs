@@ -59,17 +59,33 @@ namespace Distancify.Migrations.Tests
         }
 
         [Fact]
-        public void Locate_ApplyDependentMigrationsFirst()
+        public void Locate_OrderByAttribute()
         {
             var sut = new DefaultMigrationLocator();
             var result = sut.LocateAll<CMigration>().ToList();
 
             var expected = new List<Type>
             {
-                typeof(TestMigration),
                 typeof(C2Migration),
                 typeof(C3Migration),
-                typeof(C1Migration)
+                typeof(C1Migration),
+                typeof(TestMigration)
+            };
+
+            Assert.Equal(expected, result);
+        }
+
+        [Fact]
+        public void Locate_OrderByClassNameIfNoAttribute()
+        {
+            var sut = new DefaultMigrationLocator();
+            var result = sut.LocateAll<BAMigration>().ToList();
+
+            var expected = new List<Type>
+            {
+                typeof(B1Migration),
+                typeof(BA1Migration),
+                typeof(TestMigration)
             };
 
             Assert.Equal(expected, result);
