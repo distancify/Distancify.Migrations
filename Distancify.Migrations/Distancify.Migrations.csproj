@@ -20,4 +20,8 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Serilog" Version="2.8.0" />
+  </ItemGroup>
+
 </Project>

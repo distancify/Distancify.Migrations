@@ -26,6 +26,7 @@ namespace Distancify.Migrations
 
             foreach (var m in migrations)
             {
+                Serilog.Log.Information("Migrations: Applying {MigrationName}", m.GetType().Name);
                 m.Apply();
             }
         }

@@ -76,6 +76,10 @@ You may also have nested branches since `DefaultMigrationLocator` will apply any
 
 ![DefaultMigrationLocator Migration Tree Diagram](Distancify.Migrations.png)
 
+## Logging
+
+The project uses Serilog internally so if you want to capture log output, make sure to hook up Serilog to a sink.
+
 ## Running the tests
 
 The tests are built using xUnit and does not require any setup in order to run inside Visual Studio's standard test runner.
