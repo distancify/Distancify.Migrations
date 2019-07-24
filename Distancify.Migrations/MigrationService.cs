@@ -6,27 +6,34 @@ namespace Distancify.Migrations
     public class MigrationService
     {
         private readonly IMigrationLocator locator;
-        private readonly IMigrationLog log;
+        private readonly IMigrationLogFactory logFactory;
 
-        public MigrationService(IMigrationLocator locator, IMigrationLog log)
+        private readonly object _lock = new object();
+
+        public MigrationService(IMigrationLocator locator, IMigrationLogFactory logFactory)
         {
             this.locator = locator;
-            this.log = log;
+            this.logFactory = logFactory;
         }
 
         public void Apply<T>()
         {
-
-            var migrations = locator.LocateAll<T>()
-                .Where(r => !log.IsCommited(r))
-                .Select(r => Activator.CreateInstance(r))
-                .OfType<Migration>();
-
-            foreach (var m in migrations)
+            lock (_lock)
             {
-                Serilog.Log.Information("Migrations: Applying {MigrationName}", m.GetType().Name);
-                m.Apply();
-                log.Commit(m);
+                using (var log = logFactory.Create())
+                {
+                    var migrations = locator.LocateAll<T>()
+                        .Where(r => !log.IsCommited(r))
+                        .Select(r => Activator.CreateInstance(r))
+                        .OfType<Migration>();
+
+                    foreach (var m in migrations)
+                    {
+                        Serilog.Log.Information("Migrations: Applying {MigrationName}", m.GetType().Name);
+                        m.Apply();
+                        log.Commit(m);
+                    }
+                }
             }
         }
     }

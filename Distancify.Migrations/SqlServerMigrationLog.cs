@@ -27,6 +27,11 @@ namespace Distancify.Migrations
             _migrationLogContext.SaveChanges();
         }
 
+        public void Dispose()
+        {
+            _migrationLogContext.Dispose();
+        }
+
         public IEnumerable<Type> GetCommitted()
         {
             return _migrationLogContext.MigrationLogs.Select(m => Type.GetType(m.Type));

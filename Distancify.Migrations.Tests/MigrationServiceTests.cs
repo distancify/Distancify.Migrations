@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NSubstitute;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,7 +18,7 @@ namespace Distancify.Migrations.Tests
         [Fact]
         public void Apply_ExecutesAllChanges()
         {
-            var sut = new MigrationService(new DefaultMigrationLocator(), new InMemoryMigrationLog());
+            var sut = new MigrationService(new DefaultMigrationLocator(), new InMemoryMigrationLogFactory());
 
             sut.Apply<BAMigration>();
 
@@ -28,9 +29,12 @@ namespace Distancify.Migrations.Tests
         public void Apply_SkipAlreadyCommittedMigrations()
         {
             var log = new InMemoryMigrationLog();
+            var logFactory = Substitute.For<IMigrationLogFactory>();
+            logFactory.Create().ReturnsForAnyArgs(log);
+
             log.Commit(new B1Migration());
 
-            var sut = new MigrationService(new DefaultMigrationLocator(), log);
+            var sut = new MigrationService(new DefaultMigrationLocator(), logFactory);
 
             sut.Apply<BAMigration>();
 
@@ -41,7 +45,10 @@ namespace Distancify.Migrations.Tests
         public void Apply_CommitUncommitedMigrations()
         {
             var log = new InMemoryMigrationLog();
-            var sut = new MigrationService(new DefaultMigrationLocator(), log);
+            var logFactory = Substitute.For<IMigrationLogFactory>();
+            logFactory.Create().ReturnsForAnyArgs(log);
+
+            var sut = new MigrationService(new DefaultMigrationLocator(), logFactory);
 
             sut.Apply<BAMigration>();
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Distancify.Migrations
 {
-    public interface IMigrationLog
+    public interface IMigrationLog : IDisposable
     {
         IEnumerable<Type> GetCommitted();
 

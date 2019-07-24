@@ -15,6 +15,10 @@ namespace Distancify.Migrations
             _log.Add(migration.GetType());
         }
 
+        public void Dispose()
+        {
+        }
+
         public IEnumerable<Type> GetCommitted()
         {
             return _log;
