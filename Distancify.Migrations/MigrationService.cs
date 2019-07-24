@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Distancify.Migrations
 {
@@ -19,8 +16,9 @@ namespace Distancify.Migrations
 
         public void Apply<T>()
         {
+
             var migrations = locator.LocateAll<T>()
-                .Where(r => !log.IsApplied(r))
+                .Where(r => !log.IsCommited(r))
                 .Select(r => Activator.CreateInstance(r))
                 .OfType<Migration>();
 
@@ -28,6 +26,7 @@ namespace Distancify.Migrations
             {
                 Serilog.Log.Information("Migrations: Applying {MigrationName}", m.GetType().Name);
                 m.Apply();
+                log.Commit(m);
             }
         }
     }

@@ -36,5 +36,16 @@ namespace Distancify.Migrations.Tests
 
             Assert.Equal(2, SystemState.SomeValue);
         }
+
+        [Fact]
+        public void Apply_CommitUncommitedMigrations()
+        {
+            var log = new InMemoryMigrationLog();
+            var sut = new MigrationService(new DefaultMigrationLocator(), log);
+
+            sut.Apply<BAMigration>();
+
+            Assert.True(log.IsCommited(typeof(BA1Migration)));
+        }
     }
 }

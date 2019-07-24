@@ -20,7 +20,7 @@ namespace Distancify.Migrations
             return _log;
         }
 
-        public bool IsApplied(Type migration)
+        public bool IsCommited(Type migration)
         {
             return _log.Contains(migration);
         }

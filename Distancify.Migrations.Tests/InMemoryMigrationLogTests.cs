@@ -28,7 +28,7 @@ namespace Distancify.Migrations.Tests
         {
             var sut = new InMemoryMigrationLog();
             sut.Commit(new BA1Migration());
-            Assert.True(sut.IsApplied(typeof(BA1Migration)));
+            Assert.True(sut.IsCommited(typeof(BA1Migration)));
         }
 
         [Fact]
@@ -36,7 +36,7 @@ namespace Distancify.Migrations.Tests
         {
             var sut = new InMemoryMigrationLog();
             sut.Commit(new B1Migration());
-            Assert.False(sut.IsApplied(typeof(BA1Migration)));
+            Assert.False(sut.IsCommited(typeof(BA1Migration)));
         }
 
         [Fact]
