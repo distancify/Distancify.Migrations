@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Distancify.Migrations.Migrations.SqlMigration
+namespace Distancify.Migrations.SqlMigration
 {
     public partial class MigrationLogTableMigration : Microsoft.EntityFrameworkCore.Migrations.Migration
     {

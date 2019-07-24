@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace Distancify.Migrations.Migrations.SqlMigration
+namespace Distancify.Migrations.SqlMigration
 {
     [DbContext(typeof(MigrationLogContext))]
     partial class MigrationLogContextModelSnapshot : ModelSnapshot

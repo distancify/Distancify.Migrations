@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace Distancify.Migrations.Migrations.SqlMigration
+namespace Distancify.Migrations.SqlMigration
 {
     [DbContext(typeof(MigrationLogContext))]
     [Migration("20190719063501_MigrationLogTableMigration")]

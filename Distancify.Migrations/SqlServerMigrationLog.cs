@@ -1,17 +1,18 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Distancify.Migrations.SqlMigration;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Distancify.Migrations.SqlMigration
+namespace Distancify.Migrations
 {
-    public class SqlMigrationLog : IMigrationLog
+    public class SqlServerMigrationLog : IMigrationLog
     {
         private readonly MigrationLogContext _migrationLogContext;
 
-        public SqlMigrationLog(string connectionString)
+        public SqlServerMigrationLog(string connectionString)
         {
             _migrationLogContext = new MigrationLogContext(connectionString);
             _migrationLogContext.Database.Migrate();

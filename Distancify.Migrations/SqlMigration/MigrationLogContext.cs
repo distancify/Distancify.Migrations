@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Distancify.Migrations.SqlMigration
 {
-    public class MigrationLogContext : DbContext
+    internal class MigrationLogContext : DbContext
     {
         public const string MigrationLogTableName = "__DistancifyMigrationLog";
         private readonly string _connectionString;
