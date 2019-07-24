@@ -1,5 +1,4 @@
-﻿using Distancify.Migrations.SqlMigration;
-using System;
+﻿using System;
 using System.Linq;
 
 namespace Distancify.Migrations

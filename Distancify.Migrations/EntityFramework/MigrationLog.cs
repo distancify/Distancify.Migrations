@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Distancify.Migrations.SqlMigration
+namespace Distancify.Migrations.EntityFramework
 {
-    public class MigrationLog
+    internal class MigrationLog
     {
         public string Type { get; set; }
         public DateTime RunnedAt { get; set; }

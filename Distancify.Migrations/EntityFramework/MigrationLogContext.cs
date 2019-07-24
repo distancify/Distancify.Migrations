@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Distancify.Migrations.SqlMigration
+namespace Distancify.Migrations.EntityFramework
 {
     internal class MigrationLogContext : DbContext
     {
