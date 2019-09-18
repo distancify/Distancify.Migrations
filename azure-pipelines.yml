@@ -49,12 +49,12 @@ steps:
   inputs:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
-
-- task: NuGetCommand@2
-  displayName: 'NuGet pack'
+- task: DotNetCoreCLI@2
   inputs:
-    command: pack
-    packagesToPack: '**/Distancify.Migrations.csproj'
+    command: 'pack'
+    packagesToPack: '**/*.csproj'
+    nobuild: true
+    versioningScheme: 'off'
 
 - task: NuGetCommand@2
   displayName: 'Push to internal NuGet feed'
