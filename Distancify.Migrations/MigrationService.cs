@@ -29,9 +29,17 @@ namespace Distancify.Migrations
 
                     foreach (var m in migrations)
                     {
-                        Serilog.Log.Information("Migrations: Applying {MigrationName}", m.GetType().Name);
+                        var commitToLog = m.GetType().CustomAttributes.FirstOrDefault(r => r.AttributeType == typeof(DoNotCommitAttribute)) == null;
+
+                        Serilog.Log
+                            .ForContext("CommitToLog", commitToLog)
+                            .Information("Migrations: Applying {MigrationName}", m.GetType().Name);
                         m.Apply();
-                        log.Commit(m);
+
+                        if (commitToLog)
+                        {
+                            log.Commit(m);
+                        }
                     }
                 }
             }

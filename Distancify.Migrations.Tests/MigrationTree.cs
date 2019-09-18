@@ -96,4 +96,12 @@ namespace Distancify.Migrations.Tests
         }
     }
 
+    [DoNotCommit]
+    public class DoNotCommitMigration : Migration
+    {
+        public override void Apply()
+        {
+            
+        }
+    }
 }

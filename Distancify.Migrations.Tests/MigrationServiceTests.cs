@@ -54,5 +54,19 @@ namespace Distancify.Migrations.Tests
 
             Assert.True(log.IsCommited(typeof(BA1Migration)));
         }
+
+        [Fact]
+        public void DoNotCommitAttribute()
+        {
+            var log = new InMemoryMigrationLog();
+            var logFactory = Substitute.For<IMigrationLogFactory>();
+            logFactory.Create().ReturnsForAnyArgs(log);
+
+            var sut = new MigrationService(new DefaultMigrationLocator(), logFactory);
+
+            sut.Apply<DoNotCommitMigration>();
+
+            Assert.False(log.IsCommited(typeof(DoNotCommitMigration)));
+        }
     }
 }

@@ -42,7 +42,9 @@ Apply all migrations:
 migrations.Apply<Migration>();
 ```
 
-## Migrations Tree
+## Develop migrations
+
+### Migrations Tree
 
 Using the `DefaultMigrationLocator` You can create a tree of migrations consisting of different branches. This is useful if you use migrations to set up configuration/data at runtime, for example when there are configurations stored outside of your code, such as a database. It's also an effective way of setting up data for acceptance testing if your doing manual or automated UI testing.
 
@@ -75,6 +77,18 @@ migrations.Apply<MyMigrationBranch>();
 You may also have nested branches since `DefaultMigrationLocator` will apply any depending migrations.
 
 ![DefaultMigrationLocator Migration Tree Diagram](Distancify.Migrations.png)
+
+### Disable commit log during development
+
+During development, it's common to work on the same migrations over multiple iterations/development cycles. In order to not have to go back and clear the migration log to force a migration to be applied again, the `DoNotCommit` attribute can be applied to the migration.
+
+```csharp
+[DoNotCommit]
+public class MyMigration: Migration
+{
+	...
+}
+```
 
 ## Logging
 

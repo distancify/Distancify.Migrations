@@ -69,6 +69,7 @@ namespace Distancify.Migrations.Tests
                 typeof(C2Migration),
                 typeof(C3Migration),
                 typeof(C1Migration),
+                typeof(DoNotCommitMigration),
                 typeof(TestMigration)
             };
 
@@ -85,6 +86,7 @@ namespace Distancify.Migrations.Tests
             {
                 typeof(B1Migration),
                 typeof(BA1Migration),
+                typeof(DoNotCommitMigration),
                 typeof(TestMigration)
             };
 
