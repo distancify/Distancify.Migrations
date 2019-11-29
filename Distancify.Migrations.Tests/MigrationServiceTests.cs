@@ -15,11 +15,15 @@ namespace Distancify.Migrations.Tests
             SystemState.SomeValue = 0;
         }
 
-        private IMigrationFactory GetMigrationFactorySubstitute()
+        private IMigrationFactory GetMigrationFactorySubstitute(params Migration[] migrations)
         {
             var r = Substitute.For<IMigrationFactory>();
             r.Create(Arg.Any<IEnumerable<Type>>())
-                .Returns((ci) => ci.Arg<IEnumerable<Type>>().Select(m => (Migration)Activator.CreateInstance(m)));
+                .Returns((ci) => ci.Arg<IEnumerable<Type>>().Select(t => {
+                    var result = migrations.FirstOrDefault(m => m.GetType() == t);
+                    if (result != null) return result;
+                    return (Migration)Activator.CreateInstance(t);
+                }));
             return r;
         }
 
@@ -90,6 +94,24 @@ namespace Distancify.Migrations.Tests
             sut.Apply<B1Migration>();
 
             migrationFactory.Received().Create(Arg.Any<IEnumerable<Type>>());
+        }
+
+        [Fact]
+        public void ForceMigrationsAttribute()
+        {
+            var log = new InMemoryMigrationLog();
+            var logFactory = Substitute.For<IMigrationLogFactory>();
+            logFactory.Create().ReturnsForAnyArgs(log);
+
+            var m = new F1Migration();
+
+            var sut = new MigrationService(new DefaultMigrationLocator(), logFactory, GetMigrationFactorySubstitute(m));
+
+            log.Commit(new F1Migration());
+
+            sut.Apply<FMigration>();
+
+            Assert.Equal(1, m.Calls);
         }
     }
 }

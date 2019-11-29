@@ -104,4 +104,20 @@ namespace Distancify.Migrations.Tests
             
         }
     }
+
+    public abstract class FMigration : Migration
+    {
+    }
+
+    [ForceMigration]
+    public class F1Migration : FMigration
+    {
+        private int calls = 0;
+        public override void Apply()
+        {
+            calls += 1;
+        }
+
+        public int Calls { get { return calls; } }
+    }
 }

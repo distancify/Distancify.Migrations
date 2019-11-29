@@ -23,8 +23,8 @@ namespace Distancify.Migrations
             {
                 using (var log = logFactory.Create())
                 {
-                    var migrations = migrationFactory.Create(locator.LocateAll<T>()
-                        .Where(r => !log.IsCommited(r)));
+                    var migrations = migrationFactory.Create(
+                        locator.LocateAll<T>().Where(r => HasForceAttribute(r) || !log.IsCommited(r)));
 
                     foreach (var m in migrations)
                     {
@@ -41,6 +41,11 @@ namespace Distancify.Migrations
                         }
                     }
                 }
+            }
+
+            bool HasForceAttribute(Type migration)
+            {
+                return migration.CustomAttributes.FirstOrDefault(r => r.AttributeType == typeof(ForceMigrationAttribute)) != null;
             }
         }
     }
