@@ -152,6 +152,7 @@
   <ItemGroup>
     <Compile Include="InMemoryMigrationLogTests.cs" />
     <Compile Include="DefaultMigrationLocatorTests.cs" />
+    <Compile Include="MigrationFactoryTests.cs" />
     <Compile Include="MigrationServiceTests.cs" />
     <Compile Include="MigrationTree.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

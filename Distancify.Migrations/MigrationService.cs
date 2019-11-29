@@ -7,13 +7,14 @@ namespace Distancify.Migrations
     {
         private readonly IMigrationLocator locator;
         private readonly IMigrationLogFactory logFactory;
-
+        private readonly IMigrationFactory migrationFactory;
         private readonly object _lock = new object();
 
-        public MigrationService(IMigrationLocator locator, IMigrationLogFactory logFactory)
+        public MigrationService(IMigrationLocator locator, IMigrationLogFactory logFactory, IMigrationFactory migrationFactory)
         {
             this.locator = locator;
             this.logFactory = logFactory;
+            this.migrationFactory = migrationFactory;
         }
 
         public void Apply<T>()
@@ -22,10 +23,8 @@ namespace Distancify.Migrations
             {
                 using (var log = logFactory.Create())
                 {
-                    var migrations = locator.LocateAll<T>()
-                        .Where(r => !log.IsCommited(r))
-                        .Select(r => Activator.CreateInstance(r))
-                        .OfType<Migration>();
+                    var migrations = migrationFactory.Create(locator.LocateAll<T>()
+                        .Where(r => !log.IsCommited(r)));
 
                     foreach (var m in migrations)
                     {
