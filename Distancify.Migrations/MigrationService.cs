@@ -28,7 +28,7 @@ namespace Distancify.Migrations
 
                     foreach (var m in migrations)
                     {
-                        var commitToLog = m.GetType().CustomAttributes.FirstOrDefault(r => r.AttributeType == typeof(DoNotCommitAttribute)) == null;
+                        var commitToLog = ShouldCommitToLog(log, m);
 
                         Serilog.Log
                             .ForContext("CommitToLog", commitToLog)
@@ -41,6 +41,23 @@ namespace Distancify.Migrations
                         }
                     }
                 }
+            }
+
+            bool ShouldCommitToLog(IMigrationLog log, Migration m)
+            {
+                var type = m.GetType();
+                if (HasDoNotCommitAttribute(type))
+                    return false;
+
+                if (log.IsCommited(type))
+                    return false;
+
+                return true;
+            }
+
+            bool HasDoNotCommitAttribute(Type migration)
+            {
+                return migration.CustomAttributes.FirstOrDefault(r => r.AttributeType == typeof(DoNotCommitAttribute)) != null;
             }
 
             bool HasForceAttribute(Type migration)

@@ -99,7 +99,7 @@ namespace Distancify.Migrations.Tests
         [Fact]
         public void ForceMigrationsAttribute()
         {
-            var log = new InMemoryMigrationLog();
+            var log = Substitute.For<IMigrationLog>();
             var logFactory = Substitute.For<IMigrationLogFactory>();
             logFactory.Create().ReturnsForAnyArgs(log);
 
@@ -107,11 +107,29 @@ namespace Distancify.Migrations.Tests
 
             var sut = new MigrationService(new DefaultMigrationLocator(), logFactory, GetMigrationFactorySubstitute(m));
 
-            log.Commit(new F1Migration());
+            log.IsCommited(typeof(F1Migration)).Returns(true);
 
             sut.Apply<FMigration>();
 
             Assert.Equal(1, m.Calls);
+        }
+
+        [Fact]
+        public void ForceMigrationsAttribute_AlreadyCommittedToLog_DoNotCommitAgain()
+        {
+            var log = Substitute.For<IMigrationLog>();
+            var logFactory = Substitute.For<IMigrationLogFactory>();
+            logFactory.Create().ReturnsForAnyArgs(log);
+
+            var m = new F1Migration();
+
+            var sut = new MigrationService(new DefaultMigrationLocator(), logFactory, GetMigrationFactorySubstitute(m));
+
+            log.IsCommited(typeof(F1Migration)).Returns(true);
+
+            sut.Apply<F1Migration>();
+
+            log.DidNotReceive().Commit(Arg.Any<F1Migration>());
         }
     }
 }
