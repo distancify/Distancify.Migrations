@@ -11,8 +11,7 @@ trigger:
     include:
     - master
 
-pool:
-  vmImage: 'Default'
+pool: 'Default'
 
 variables:
   solution: '**/*.sln'
