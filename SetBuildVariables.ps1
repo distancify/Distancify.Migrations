@@ -15,7 +15,7 @@ elseif ($Env:BUILD_BUILDNUMBER -match "^\d+.(\d+)$")
     $revision = $matches[1]
     $fileVersion = "$major.$minor.$build.$revision"
     $packageVersion = "$fileVersion-ci"
-    $pushToNugetOrg = 'false'
+    $pushToNugetOrg = 'true'
 }
 
 Write-Output "Setting build variables..."
