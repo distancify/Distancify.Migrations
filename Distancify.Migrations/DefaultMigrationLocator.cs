@@ -14,7 +14,8 @@ namespace Distancify.Migrations
             "Microsoft.",
             "xunit.",
             "System",
-            "mscorlib"
+            "mscorlib",
+            "DynamicProxyGenAssembly2"
         };
 
         public IEnumerable<Type> LocateAll<TBase>()
