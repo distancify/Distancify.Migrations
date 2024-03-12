@@ -1,31 +1,19 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <OutputType>Library</OutputType>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>    
+    <Deterministic>true</Deterministic>
     <AssemblyTitle>Distancify.Migrations.Tests</AssemblyTitle>
     <Product>Distancify.Migrations.Tests</Product>
     <Copyright>Copyright ©  2019</Copyright>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <FileVersion>1.0.0.0</FileVersion>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Kristoffer|AnyCPU'">
-    <OutputPath>bin\Kristoffer\</OutputPath>
-  </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Distancify.Migrations\Distancify.Migrations.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <Analyzer Include="..\packages\xunit.analyzers.0.10.0\analyzers\dotnet\cs\xunit.analyzers.dll" />
-  </ItemGroup>
+  </ItemGroup>  
   <ItemGroup>   
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.9.0" />   
     <PackageReference Include="NSubstitute" Version="5.1.0" />
-    <PackageReference Include="Serilog" Version="2.8.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.2" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.2" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.2" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.2" />
     <PackageReference Include="xunit" Version="2.7.0" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.5.7">
       <PrivateAssets>all</PrivateAssets>
