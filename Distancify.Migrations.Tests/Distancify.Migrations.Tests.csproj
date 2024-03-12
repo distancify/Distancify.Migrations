@@ -13,10 +13,6 @@
     <OutputPath>bin\Kristoffer\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System.Configuration" />
-    <Reference Include="System.IdentityModel" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Distancify.Migrations\Distancify.Migrations.csproj" />
   </ItemGroup>
   <ItemGroup>
